@@ -9,3 +9,9 @@ const birthYear = 2002;
     const currentYear = new Date().getFullYear();
     const age = currentYear - birthYear;
     document.getElementById("age").textContent = age;
+
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(() => console.log('Service Worker registered successfully.'));
+}
