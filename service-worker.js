@@ -2,7 +2,7 @@ const CACHE_NAME = "alforja-portfolio-cache";
 
 const urlsToCache = [
   "index.html",
-  "styles.css",
+  "style.css",
   "mediaqueries.css",
   "script.js",
 ];
