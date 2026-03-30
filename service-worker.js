@@ -9,10 +9,13 @@ const urlsToCache = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    Promise.all(
+      urlsToCache.map(url => 
+        fetch(url).then(response => { if (!response.ok) throw new Error(url+' -> '+response.status); return response; })
+        )
+      )
+      .then(responses => caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)))
+      .catch(error => console.error('Failed to cache resources:', error))
   );
 });
 
